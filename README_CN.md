@@ -1,40 +1,31 @@
 <a name="top"></a>
-<br>
-<p align="center" style="font-size: 32px;"><b>Search with AI</b></p>
-<p align="center">
-  基于AI大语言模型的对话式搜索引擎，基于Node.js&Vue3。适合新手入门AI大模型开发参考:)，文档后有交流群二维码。
-</p>
-<p align="center">
-  <a href="https://isou.chat/">Live Demo</a>
-</p>
 
-<p align="center">
-  <a href="https://github.com/yokingma/search_with_ai/stargazers"><img src="https://img.shields.io/github/stars/yokingma/search_with_ai" alt="Github Stars"></a>
-  <a href="https://github.com/yokingma/search_with_ai/blob/main/LICENSE"><img src="https://img.shields.io/badge/license-MIT-purple" alt="License"></a>
-  <a href="https://github.com/yokingma/search_with_ai/issues/new"><img src="https://img.shields.io/badge/Report a bug-Github-%231F80C0" alt="Report a bug"></a>
-  <a href="https://github.com/yokingma/search_with_ai/discussions/new?category=q-a"><img src="https://img.shields.io/badge/Ask a question-Github-%231F80C0" alt="Ask a question"></a>
-</p>
+# Search with AI
 
-[English](./README.md) **中文** [日本語](./README_JP.md)
+基于 AI 的搜索引擎，使用 Node.js & Vue3 构建的对话式搜索实现。
 
-<div align="center">
- <img src="./assets/screenshot_cn.jpg"></img>
-</div>
+[![Github Stars](https://img.shields.io/github/stars/hloolx/search_with_ai)](https://github.com/hloolx/search_with_ai)
+[![License](https://img.shields.io/github/license/hloolx/search_with_ai)](https://github.com/hloolx/search_with_ai/blob/main/LICENSE)
 
-仓库地址：[GitHub仓库](https://github.com/yokingma/search_with_ai) [Gitee仓库](https://gitee.com/zac_ma/search_with_ai) [CNB](https://cnb.cool/isou/AiSearch) 
+代码仓库：[GitHub](https://github.com/hloolx/search_with_ai)
 
-## 功能说明
+## 功能特性
 
-* 内置主流的LLM接口支持，如OpenAI、Google、DeepSeek(R1)、SiliconFlow、腾讯混元、通译千问、百度、Lepton、零一万物、月之暗面等。
-* 支持本地大模型（基于Ollama、lmStudio）。
-* 内置搜索引擎支持，如Bing、Sogou、Google、[SearXNG](https://github.com/searxng/searxng), 支持ChatGLM Web搜索插件 [作为搜索引擎, 目前免费]。
-* 简洁的搜索对话Web界面，支持暗色模式、移动端。
-* 支持搜索引擎切换、AI模型切换。
-* 支持多语言（i18n）。
-* 支持根据上下文结果继续问答。
-* 支持回答结果缓存（可以强制刷新）。
-* 支持图片搜索。
-* 支持完整的网页内容抓取，基于[Jina](https://jina.ai/) Reader URL。
+* 内置支持多种大模型：OpenAI、Google、Lepton、DeepSeek(R1)、SiliconFlow、阿里云、百度、ChatGLM、Moonshot、腾讯、Yi 等
+* 支持本地模型：Ollama、LMStudio
+* 内置支持多个搜索引擎：Bing、Google、SearXNG
+* 美观的用户界面，支持自定义主题
+* 支持亮色/暗色模式，适配移动端
+* 支持多语言（i18n）
+* 支持上下文连续对话
+* 支持结果缓存，强制刷新
+* 支持图片搜索
+* 支持网页全文提取（基于 Jina Reader URL）
+* 支持热搜榜功能
+  - 实时获取抖音/微博/百度/B站热搜
+  - 支持多平台热搜切换
+  - 显示热度数据
+  - 一键搜索热门话题
 
 ## 使用 Docker 安装部署
 
@@ -288,6 +279,6 @@ export type TMode = 'simple' | 'deep' | 'research'
 
 ## 许可证
 
-此存储库的源代码在[MIT许可证](LICENSE)下提供。
+本项目源代码基于 MIT 许可证开源。
 
 [🚀回到顶部](#top)

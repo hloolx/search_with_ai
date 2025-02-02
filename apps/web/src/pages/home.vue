@@ -1,11 +1,45 @@
 <template>
   <div id="home" class="flex size-full items-center justify-center dark:bg-black">
-    <div class="mt-36 flex w-full flex-col gap-4 p-4 sm:-mt-28 lg:max-w-3xl xl:max-w-4xl">
+    <div class="mt-36 relative flex w-full flex-col gap-4 p-4 sm:-mt-28 lg:max-w-3xl xl:max-w-4xl">
+      <!-- 顶部工具栏：选择模型、搜索引擎和切换语言、主题 -->
+      <div class="flex justify-between items-center w-full mb-8">
+        <!-- 左侧：选择模型和搜索引擎 -->
+        <div class="flex items-center justify-end gap-2">
+          <div class="w-32 rounded-full border border-gray-300 bg-white/95 shadow-sm px-2 py-1.5 hover:border-gray-400 transition-colors dark:border-gray-700 dark:bg-gray-800/90">
+            <ModelSelect />
+          </div>
+          <div class="w-28 rounded-full border border-gray-300 bg-white/95 shadow-sm px-2 py-1.5 hover:border-gray-400 transition-colors dark:border-gray-700 dark:bg-gray-800/90">
+            <SearchEngineSelect />
+          </div>
+        </div>
+
+        <!-- 右侧：GitHub、切换语言和主题 -->
+        <div class="flex space-x-2">
+          <t-button 
+            shape="circle" 
+            variant="outline" 
+            tag="a"
+            href="https://github.com/hloolx/search_with_ai"
+            target="_blank"
+          >
+            <RiGithubLine size="20" />
+          </t-button>
+          <t-button shape="circle" variant="outline" @click="onToggleLanguage">
+            {{ locale === 'zh' ? '中' : 'EN' }}
+          </t-button>
+          <t-button shape="circle" variant="outline" @click="onToggleTheme">
+            <component :is="appStore.theme === 'dark' ? RiMoonLine : RiSunLine" size="20" />
+          </t-button>
+        </div>
+      </div>
+
+      <!-- Logo和标题 -->
       <div class="flex items-center justify-center gap-2">
         <img :src="logoUrl" class="w-10" />
         <span class="text-3xl font-bold text-gray-900 dark:text-gray-100">AI Search</span>
         <t-tag variant="light" class="text-xs text-gray-500">beta</t-tag>
       </div>
+
       <SearchInputBar :autofocus="true" :loading="false" @search="search" />
       
       <div class="my-2 flex flex-wrap items-center justify-center gap-4">
@@ -110,14 +144,14 @@
 <script setup lang="tsx">
 import { ref, watch, onMounted } from 'vue';
 import router from '../router';
-import { RiSearch2Line, RiRefreshLine } from '@remixicon/vue';
-import { PageFooter, SearchInputBar, SearCategory, SearchMode } from '../components';
+import { RiSearch2Line, RiRefreshLine, RiMoonLine, RiSunLine, RiGithubLine } from '@remixicon/vue';
+import { PageFooter, SearchInputBar, SearCategory, SearchMode, ModelSelect, SearchEngineSelect } from '../components';
 import logoUrl from '../assets/logo.png';
 import { useI18n } from 'vue-i18n';
 import { computed } from 'vue';
 import { useAppStore } from '../store';
 
-const { locale } = useI18n();
+const { locale, t } = useI18n();
 const appStore = useAppStore();
 
 const enableAdvanced = computed(() => appStore.engine === 'SEARXNG');
@@ -229,6 +263,22 @@ const formatHotValue = (hot: string | number) => {
 watch(currentPlatform, (newPlatform) => {
   fetchHotSearch(newPlatform);
 });
+
+const onToggleLanguage = () => {
+  const newLang = locale.value === 'zh' ? 'en' : 'zh';
+  locale.value = newLang;
+  appStore.updateLanguage(newLang);
+};
+
+const onToggleTheme = () => {
+  const newTheme = appStore.theme === 'dark' ? 'light' : 'dark';
+  appStore.updateTheme(newTheme);
+  if(newTheme === 'dark'){
+    document.documentElement.setAttribute('theme-mode', 'dark');
+  } else {
+    document.documentElement.removeAttribute('theme-mode');
+  }
+};
 
 onMounted(() => {
   fetchHotSearch(currentPlatform.value);
